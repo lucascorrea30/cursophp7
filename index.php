@@ -28,9 +28,15 @@ $sql = new Sql();
 // echo $aluno;
 
 // Update
+// $user = new Usuario();
+// $user->loadById(6);
+// $user->update("professor", "profs");
+// echo $user;
+
+// Delete
 $user = new Usuario();
-$user->loadById(6);
-$user->update("professor", "profs");
+$user->loadById(5);
+$user->delete();
 echo $user;
 
  ?>

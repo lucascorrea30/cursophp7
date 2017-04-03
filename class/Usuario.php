@@ -19,7 +19,7 @@ class Usuario {
 
 	// GETs e SETs
 	// ID Usuario
-	public function getIdUsuario():int
+	public function getIdUsuario()
 	{
 		return $this->id_usuario;
 	}
@@ -28,7 +28,7 @@ class Usuario {
 		$this->id_usuario = $id_usuario;
 	}
 	// Login
-	public function getLogin():string
+	public function getLogin()
 	{
 		return $this->login;
 	}
@@ -37,7 +37,7 @@ class Usuario {
 		$this->login = $login;
 	}
 	// Senha
-	public function getSenha():string
+	public function getSenha()
 	{
 		return $this->senha;
 	}
@@ -88,7 +88,15 @@ class Usuario {
 
 	}
 
-	private function setData($data) {
+	private function setData($data = array()) {
+		if ( count($data) == 0 ) {
+			$data = array(
+				'id_usuario' => 0,
+				'login' => "",
+				'senha' => "",
+				'data_cadastro' => ""
+				);
+		}
 		$this->setIdUsuario($data['id_usuario']);
 		$this->setLogin($data['login']);
 		$this->setSenha($data['senha']);
@@ -140,6 +148,18 @@ class Usuario {
 			':SENHA' => $this->getSenha(),
 			':ID' => $this->getIdUsuario()
 			));
+
+	}
+
+	public function delete() {
+
+		$sql = new Sql();
+
+		$sql->select("DELETE FROM `tb_usuario` WHERE `id_usuario` = :ID", array(
+			':ID' => $this->getIdUsuario()
+			));
+
+		$this->setData();
 
 	}
 
